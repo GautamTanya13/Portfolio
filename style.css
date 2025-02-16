@@ -1,0 +1,35 @@
+*{
+    color: blueviolet;
+    background-color: rgb(225, 202, 246);
+    font-family:'Gill Sans', 'Gill Sans MT';
+}
+body{
+    /* background-color: rgb(170, 145, 195); */
+}
+
+nav{
+    box-sizing: border-box;
+    margin: 5%;
+    padding: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color:black;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+    display: inline-block;
+}
+
+nav a{
+    color: white;
+    text-decoration:none;
+    padding: 10px;
+}
+
+nav a:hover{
+    /* margin: 100; */
+    padding: 2%;
+    background-color: blueviolet;
+    text-align: right;
+    padding: 20px;
+}
