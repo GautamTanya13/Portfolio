@@ -1,21 +1,637 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        :root {
+            --primary-50: #CAF0F8;
+            --primary-100: #90E0EF;
+            --primary-200: #00B4D8;
+            --primary-300: #0077B6;
+            --primary-400: #03045E;
+        }
+        
+        .dark {
+            --primary-50: #03045E;
+            --primary-100: #0077B6;
+            --primary-200: #00B4D8;
+            --primary-300: #90E0EF;
+            --primary-400: #CAF0F8;
+        }
+        
+        body {
+            transition: background-color 0.3s ease;
+        }
+        
+        .bg-primary-50 {
+            background-color: var(--primary-50);
+        }
+        
+        .bg-primary-100 {
+            background-color: var(--primary-100);
+        }
+        
+        .bg-primary-200 {
+            background-color: var(--primary-200);
+        }
+        
+        .bg-primary-300 {
+            background-color: var(--primary-300);
+        }
+        
+        .bg-primary-400 {
+            background-color: var(--primary-400);
+        }
+        
+        .text-primary-50 {
+            color: var(--primary-50);
+        }
+        
+        .text-primary-100 {
+            color: var(--primary-100);
+        }
+        
+        .text-primary-200 {
+            color: var(--primary-200);
+        }
+        
+        .text-primary-300 {
+            color: var(--primary-300);
+        }
+        
+        .text-primary-400 {
+            color: var(--primary-400);
+        }
+        
+        .border-primary-200 {
+            border-color: var(--primary-200);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--primary-200);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background-color: var(--primary-200);
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -26px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary-200);
+        }
+    </style>
 </head>
-<body>
-    <nav>
-    <a href="/education.html">EDUCATION</a>
-    <a href="/exp.html">EXPERIENCE</a>
-    <a href="/projs.html">PROJECTS</a>
+<body class="bg-primary-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-primary-400 dark:bg-gray-800 shadow-lg fixed w-full z-10">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-xl font-bold text-primary-50 dark:text-primary-100">My Portfolio</a>
+                <div class="flex items-center space-x-4">
+                    <div class="hidden md:flex space-x-8">
+                        <a href="#home" class="nav-link text-primary-50 dark:text-primary-100 hover:text-primary-200">Home</a>
+                        <a href="#about" class="nav-link text-primary-50 dark:text-primary-100 hover:text-primary-200">About</a>
+                        <a href="#experience" class="nav-link text-primary-50 dark:text-primary-100 hover:text-primary-200">Experience</a>
+                        <a href="#leadership" class="nav-link text-primary-50 dark:text-primary-100 hover:text-primary-200">Leadership</a>
+                        <a href="#education" class="nav-link text-primary-50 dark:text-primary-100 hover:text-primary-200">Education</a>
+                        <a href="#hobbies" class="nav-link text-primary-50 dark:text-primary-100 hover:text-primary-200">Hobbies</a>
+                        <a href="#contact" class="nav-link text-primary-50 dark:text-primary-100 hover:text-primary-200">Contact</a>
+                    </div>
+                    <button id="theme-toggle" class="p-2 rounded-full bg-primary-300 dark:bg-primary-100 text-primary-50 dark:text-primary-400">
+                        <i data-feather="moon" class="hidden dark:block"></i>
+                        <i data-feather="sun" class="dark:hidden"></i>
+                    </button>
+                    <button id="mobile-menu-button" class="md:hidden p-2 rounded-full bg-primary-300 dark:bg-primary-100 text-primary-50 dark:text-primary-400">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="#home" class="nav-link text-primary-50 dark:text-primary-100 hover:text-primary-200">Home</a>
+                    <a href="#about" class="nav-link text-primary-50 dark:text-primary-100 hover:text-primary-200">About</a>
+                    <a href="#experience" class="nav-link text-primary-50 dark:text-primary-100 hover:text-primary-200">Experience</a>
+                    <a href="#leadership" class="nav-link text-primary-50 dark:text-primary-100 hover:text-primary-200">Leadership</a>
+                    <a href="#education" class="nav-link text-primary-50 dark:text-primary-100 hover:text-primary-200">Education</a>
+                    <a href="#hobbies" class="nav-link text-primary-50 dark:text-primary-100 hover:text-primary-200">Hobbies</a>
+                    <a href="#contact" class="nav-link text-primary-50 dark:text-primary-100 hover:text-primary-200">Contact</a>
+                </div>
+            </div>
+        </div>
     </nav>
-    <hr>
-    <h1>PORTFOLIO</h1>
-    <hr>
-    <p>This is the paragraph for my portfolio page</p>
-    
+
+    <!-- Home Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20">
+        <div class="container mx-auto px-6 py-12 md:py-24">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0" data-aos="fade-right">
+                    <img src="http://static.photos/people/640x360/1" alt="Profile" class="rounded-full w-64 h-64 object-cover mx-auto shadow-xl border-4 border-primary-200">
+                </div>
+                <div class="md:w-1/2 text-center md:text-left" data-aos="fade-left">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4 text-primary-400 dark:text-primary-200">Hi, I'm John Doe</h1>
+                    <h2 class="text-2xl md:text-3xl mb-6 text-primary-300 dark:text-primary-100">Frontend Developer & UI Designer</h2>
+                    <p class="text-lg mb-8 text-gray-700 dark:text-gray-300">I create beautiful, functional websites with a focus on user experience and clean code.</p>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#contact" class="px-6 py-3 bg-primary-200 text-white rounded-lg hover:bg-primary-300 transition duration-300">Contact Me</a>
+                        <a href="#about" class="px-6 py-3 border-2 border-primary-200 text-primary-400 dark:text-primary-200 rounded-lg hover:bg-primary-200 hover:text-white transition duration-300">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-primary-100 dark:bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary-400 dark:text-primary-200" data-aos="fade-up">About Me</h2>
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-8 md:mb-0" data-aos="fade-right">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary-300 dark:text-primary-100">Who I Am</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-6">I'm a passionate frontend developer with 5 years of experience creating responsive and accessible web applications. My journey in tech started when I built my first website at 15, and I've been hooked ever since.</p>
+                    <p class="text-gray-700 dark:text-gray-300 mb-6">When I'm not coding, you can find me mentoring junior developers, contributing to open source projects, or exploring new design trends.</p>
+                    <p class="text-gray-700 dark:text-gray-300">I believe in creating digital experiences that are not only visually appealing but also intuitive and accessible to all users.</p>
+                </div>
+                <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary-300 dark:text-primary-100">My Skills</h3>
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-2">Frontend Development</h4>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-primary-200 h-2.5 rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-2">UI/UX Design</h4>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-primary-200 h-2.5 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-2">JavaScript</h4>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-primary-200 h-2.5 rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium mb-2">React</h4>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-primary-200 h-2.5 rounded-full" style="width: 88%"></div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mt-8">
+                        <div class="flex items-center">
+                            <i data-feather="check-circle" class="text-primary-200 mr-2"></i>
+                            <span>Responsive Design</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-feather="check-circle" class="text-primary-200 mr-2"></i>
+                            <span>Accessibility</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-feather="check-circle" class="text-primary-200 mr-2"></i>
+                            <span>Performance</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-feather="check-circle" class="text-primary-200 mr-2"></i>
+                            <span>SEO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section id="experience" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary-400 dark:text-primary-200" data-aos="fade-up">Work Experience</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="relative pl-8 timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
+                        <div class="flex flex-col md:flex-row justify-between mb-2">
+                            <h3 class="text-xl font-bold text-primary-300 dark:text-primary-100">Senior Frontend Developer</h3>
+                            <span class="text-primary-200 dark:text-primary-100">2021 - Present</span>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">Tech Solutions Inc.</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Leading a team of 5 developers to build enterprise-level web applications with React and TypeScript.</p>
+                        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-400">
+                            <li>Improved application performance by 40% through code optimization</li>
+                            <li>Implemented CI/CD pipeline reducing deployment time by 60%</li>
+                            <li>Mentored junior developers through code reviews and pair programming</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="relative pl-8 timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
+                        <div class="flex flex-col md:flex-row justify-between mb-2">
+                            <h3 class="text-xl font-bold text-primary-300 dark:text-primary-100">Frontend Developer</h3>
+                            <span class="text-primary-200 dark:text-primary-100">2018 - 2021</span>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">Digital Creations</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Developed responsive websites and web applications for clients across various industries.</p>
+                        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-400">
+                            <li>Built 15+ client websites with 100% satisfaction rate</li>
+                            <li>Reduced page load times by implementing lazy loading</li>
+                            <li>Collaborated with designers to implement pixel-perfect UIs</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="relative pl-8 timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                        <div class="flex flex-col md:flex-row justify-between mb-2">
+                            <h3 class="text-xl font-bold text-primary-300 dark:text-primary-100">Junior Web Developer</h3>
+                            <span class="text-primary-200 dark:text-primary-100">2016 - 2018</span>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">StartUp Ventures</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Assisted in developing and maintaining company website and internal tools.</p>
+                        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-400">
+                            <li>Implemented new features based on user feedback</li>
+                            <li>Fixed bugs and improved existing codebase</li>
+                            <li>Learned modern JavaScript frameworks on the job</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section id="leadership" class="py-20 bg-primary-100 dark:bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary-400 dark:text-primary-200" data-aos="fade-up">Leadership Experience</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg" data-aos="fade-up">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary-200 p-3 rounded-full mr-4">
+                            <i data-feather="users" class="text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary-300 dark:text-primary-100">Tech Community Lead</h3>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">Local Developer Group</h4>
+                    <span class="text-primary-200 dark:text-primary-100">2019 - Present</span>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4">Organize monthly meetups and workshops for local developers, with attendance growing from 20 to 150+ members.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg" data-aos="fade-up">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary-200 p-3 rounded-full mr-4">
+                            <i data-feather="book" class="text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary-300 dark:text-primary-100">Mentor</h3>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">Coding Bootcamp</h4>
+                    <span class="text-primary-200 dark:text-primary-100">2020 - Present</span>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4">Guide students through their full-stack development journey, helping them build portfolio projects and prepare for job interviews.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg" data-aos="fade-up">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary-200 p-3 rounded-full mr-4">
+                            <i data-feather="globe" class="text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary-300 dark:text-primary-100">Open Source Contributor</h3>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">Various Projects</h4>
+                    <span class="text-primary-200 dark:text-primary-100">2017 - Present</span>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4">Contributed to 10+ open source projects, focusing on documentation improvements and accessibility features.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg" data-aos="fade-up">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary-200 p-3 rounded-full mr-4">
+                            <i data-feather="mic" class="text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary-300 dark:text-primary-100">Conference Speaker</h3>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">Web Dev Conferences</h4>
+                    <span class="text-primary-200 dark:text-primary-100">2020 - Present</span>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4">Presented at 5 conferences on topics including React performance optimization and accessible web design.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary-400 dark:text-primary-200" data-aos="fade-up">Education</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="relative pl-8 timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
+                        <div class="flex flex-col md:flex-row justify-between mb-2">
+                            <h3 class="text-xl font-bold text-primary-300 dark:text-primary-100">Master of Computer Science</h3>
+                            <span class="text-primary-200 dark:text-primary-100">2014 - 2016</span>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">Tech University</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Specialized in Human-Computer Interaction and Web Technologies.</p>
+                        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-400">
+                            <li>Graduated with Honors (GPA: 3.9/4.0)</li>
+                            <li>Thesis: "Improving Web Accessibility Through Semantic HTML"</li>
+                            <li>Teaching Assistant for Web Development course</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="relative pl-8 timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                        <div class="flex flex-col md:flex-row justify-between mb-2">
+                            <h3 class="text-xl font-bold text-primary-300 dark:text-primary-100">Bachelor of Science in Computer Science</h3>
+                            <span class="text-primary-200 dark:text-primary-100">2010 - 2014</span>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">State University</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Focus on Software Engineering and Database Systems.</p>
+                        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-400">
+                            <li>Minor in Digital Arts</li>
+                            <li>President of Computer Science Club</li>
+                            <li>Developed university's first mobile app as senior project</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section id="hobbies" class="py-20 bg-primary-100 dark:bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary-400 dark:text-primary-200" data-aos="fade-up">My Hobbies</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg text-center" data-aos="fade-up">
+                    <div class="bg-primary-200 p-4 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <i data-feather="camera" class="text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-primary-300 dark:text-primary-100">Photography</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Capturing moments and landscapes, especially during my travels. I enjoy both digital and film photography.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-primary-200 p-4 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <i data-feather="map" class="text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-primary-300 dark:text-primary-100">Travel</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Exploring new cultures and cuisines. I've visited 15 countries and aim to experience more diverse cultures.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-primary-200 p-4 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <i data-feather="music" class="text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-primary-300 dark:text-primary-100">Music</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Playing guitar and piano. I occasionally perform at local open mic nights and enjoy composing my own music.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+                <img src="http://static.photos/travel/320x240/1" alt="Travel" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" data-aos="fade-up">
+                <img src="http://static.photos/nature/320x240/2" alt="Nature" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="100">
+                <img src="http://static.photos/cityscape/320x240/3" alt="City" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="200">
+                <img src="http://static.photos/food/320x240/4" alt="Food" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="300">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary-400 dark:text-primary-200" data-aos="fade-up">Get In Touch</h2>
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-8 md:mb-0" data-aos="fade-right">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary-300 dark:text-primary-100">Contact Information</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-6">Feel free to reach out for collaborations or just a friendly hello!</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="bg-primary-200 p-2 rounded-full mr-4">
+                                <i data-feather="mail" class="text-white"></i>
+                            </div>
+                            <span>john.doe@example.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-primary-200 p-2 rounded-full mr-4">
+                                <i data-feather="phone" class="text-white"></i>
+                            </div>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-primary-200 p-2 rounded-full mr-4">
+                                <i data-feather="map-pin" class="text-white"></i>
+                            </div>
+                            <span>San Francisco, CA</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="text-lg font-semibold mb-4 text-primary-300 dark:text-primary-100">Connect With Me</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="bg-primary-200 p-3 rounded-full text-white hover:bg-primary-300 transition duration-300">
+                                <i data-feather="linkedin"></i>
+                            </a>
+                            <a href="#" class="bg-primary-200 p-3 rounded-full text-white hover:bg-primary-300 transition duration-300">
+                                <i data-feather="github"></i>
+                            </a>
+                            <a href="#" class="bg-primary-200 p-3 rounded-full text-white hover:bg-primary-300 transition duration-300">
+                                <i data-feather="twitter"></i>
+                            </a>
+                            <a href="#" class="bg-primary-200 p-3 rounded-full text-white hover:bg-primary-300 transition duration-300">
+                                <i data-feather="instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
+                    <form id="contact-form" class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 dark:text-gray-300 mb-2">Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-200 dark:bg-gray-700 dark:text-white" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-200 dark:bg-gray-700 dark:text-white" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="subject" class="block text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+                            <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-200 dark:bg-gray-700 dark:text-white" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-200 dark:bg-gray-700 dark:text-white" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-primary-200 text-white py-3 rounded-lg hover:bg-primary-300 transition duration-300 font-medium">Send Message</button>
+                    </form>
+                    <div id="form-success" class="hidden mt-4 p-4 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-lg">
+                        Your message has been sent successfully!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary-400 dark:bg-gray-800 py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="#" class="text-xl font-bold text-primary-50 dark:text-primary-100">My Portfolio</a>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#home" class="text-primary-50 dark:text-primary-100 hover:text-primary-200">Home</a>
+                    <a href="#about" class="text-primary-50 dark:text-primary-100 hover:text-primary-200">About</a>
+                    <a href="#experience" class="text-primary-50 dark:text-primary-100 hover:text-primary-200">Experience</a>
+                    <a href="#contact" class="text-primary-50 dark:text-primary-100 hover:text-primary-200">Contact</a>
+                </div>
+            </div>
+            <div class="border-t border-primary-300 dark:border-gray-700 mt-6 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-primary-50 dark:text-primary-100 mb-4 md:mb-0">© 2023 My Portfolio. All rights reserved.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-primary-50 dark:text-primary-100 hover:text-primary-200">
+                        <i data-feather="linkedin"></i>
+                    </a>
+                    <a href="#" class="text-primary-50 dark:text-primary-100 hover:text-primary-200">
+                        <i data-feather="github"></i>
+                    </a>
+                    <a href="#" class="text-primary-50 dark:text-primary-100 hover:text-primary-200">
+                        <i data-feather="twitter"></i>
+                    </a>
+                    <a href="#" class="text-primary-50 dark:text-primary-100 hover:text-primary-200">
+                        <i data-feather="instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top bg-primary-200 text-white p-3 rounded-full shadow-lg hover:bg-primary-300 transition duration-300">
+        <i data-feather="arrow-up"></i>
+    </a>
+
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // Check for saved user preference, if any, on load of the website
+        if (localStorage.getItem('theme') === 'dark') {
+            html.classList.add('dark');
+        } else if (localStorage.getItem('theme') === 'light') {
+            html.classList.remove('dark');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+            feather.replace();
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            feather.replace();
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // Show/hide back to top button based on scroll position
+        window.addEventListener('scroll', () => {
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById('contact-form');
+        const formSuccess = document.getElementById('form-success');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simulate form submission
+            setTimeout(() => {
+                contactForm.reset();
+                formSuccess.classList.remove('hidden');
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    formSuccess.classList.add('hidden');
+                }, 5000);
+            }, 1000);
+        });
+        
+        // Initialize AOS and Feather Icons
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            feather.replace();
+        });
+    </script>
 </body>
 </html>
