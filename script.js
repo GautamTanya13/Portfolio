@@ -1,4 +1,3 @@
-
 // Theme toggle
 const themeToggle = document.getElementById('theme-toggle');
 const html = document.documentElement;
@@ -67,3 +66,34 @@ document.addEventListener('DOMContentLoaded', () => {
     
     feather.replace();
 });
+
+const texts = [
+    "Designer",
+    "Software Developer",
+    "Tester",
+    "Product Manager"
+  ];
+
+  let textIndex = 0;
+  let charIndex = 0;
+  let currentText = "";
+  const speed = 100; // typing speed (ms per char)
+  const pause = 1000; // pause between texts
+
+  function typeEffect() {
+    if (charIndex < texts[textIndex].length) {
+      currentText += texts[textIndex].charAt(charIndex);
+      document.getElementById("output").textContent = currentText;
+      charIndex++;
+      setTimeout(typeEffect, speed);
+    } else {
+      setTimeout(() => {
+        currentText = "";
+        charIndex = 0;
+        textIndex = (textIndex + 1) % texts.length; // loop through texts
+        typeEffect();
+      }, pause);
+    }
+  }
+
+  typeEffect();
