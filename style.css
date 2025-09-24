@@ -1,7 +1,7 @@
 /* Add gradient background + subtle animation for hero section */
 #home {
     position: relative; /* Needed for overlay effects */
-    background: linear-gradient(135deg, var(--primary-50), var(--primary-200));
+    background: linear-gradient(150deg, var(--primary-50), var(--primary-150));
     overflow: hidden; /* Prevent overflow from particles */
 }
 
@@ -25,15 +25,17 @@
     --primary-50: #fefbdf;
     /* --primary-100: #FFEE32; */
     --primary-100: #fcf5ba;
-    --primary-200: #FFD100;
-    --primary-300: #FFB347;
-    --primary-400: #ffa600;
+    --primary-150: #FFD100;
+    --primary-200: #ffa600;
+    --primary-300: #F97316;
+    --primary-400: #f98a3a;
     /* --primary-500: #fcf6c5; */
   }
   
   .dark {
     --primary-50: #070707;
     --primary-100: #1A3A66;
+    --primary-150: #1368b2;
     --primary-200: #3380C3;
     --primary-300: #66A3E0;
     --primary-400: #B3D1F2;
