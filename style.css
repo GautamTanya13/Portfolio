@@ -23,10 +23,12 @@
 
 :root {
     --primary-50: #fefbdf;
-    --primary-100: #FFEE32;
+    /* --primary-100: #FFEE32; */
+    --primary-100: #fcf5ba;
     --primary-200: #FFD100;
     --primary-300: #FFB347;
     --primary-400: #ffa600;
+    /* --primary-500: #fcf6c5; */
   }
   
   .dark {

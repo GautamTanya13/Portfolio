@@ -1,6 +1,6 @@
 // Theme toggle
-const themeToggle = document.getElementById('theme-toggle');
-const html = document.documentElement;
+var themeToggle = document.getElementById('theme-toggle');
+var html = document.documentElement;
 
 // Check for saved user preference, if any, on load of the website
 if (localStorage.getItem('theme') === 'dark') {
@@ -10,6 +10,7 @@ if (localStorage.getItem('theme') === 'dark') {
 }
 
 themeToggle.addEventListener('click', () => {
+    // console.log("Dark mode");
     html.classList.toggle('dark');
     localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
     feather.replace();
@@ -49,7 +50,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Show/hide back to top button based on scroll position
 window.addEventListener('scroll', () => {
     const backToTopButton = document.querySelector('.back-to-top');
-    if (window.pageYOffset > 300) {
+    if (window.pageOffset > 300) {
         backToTopButton.style.display = 'block';
     } else {
         backToTopButton.style.display = 'none';
