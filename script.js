@@ -69,10 +69,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const texts = [
-    "Designer",
-    "Software Developer",
-    "Tester",
-    "Product Manager"
+    // "Designer",
+    // "Software Developer",
+    // "Tester",
+    // "Product Manager"
+    "Traveller",
+    "Foodie",
+    "Email Marketing Specialist",
+    "Technology Entusiast",
   ];
 
   let textIndex = 0;
