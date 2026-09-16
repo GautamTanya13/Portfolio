@@ -76,7 +76,7 @@ const texts = [
     "Traveller",
     "Foodie",
     "Email Marketing Specialist",
-    "Technology Entusiast",
+    "Technology Enthusiast",
   ];
 
   let textIndex = 0;
